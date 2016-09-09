@@ -6,6 +6,9 @@ wifi.sta.config(ssid,password)
 wifi.sta.connect()
 
 ssid=nil
-password=nil
+password=nil 
 
-dofile("mqtt-client.lc")
+-- add a variable "program" to your config.lc
+-- hint: you can use a hidden field in configform.html
+if (defaultprogram == nil) then defaultprogram = "defaultprogram.lc" end
+dofile(defaultprogram)
