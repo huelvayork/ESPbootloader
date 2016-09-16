@@ -5,6 +5,14 @@ function trim(s)
   return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
+function unescape(s)
+     s = string.gsub(s, "+", " ")
+     s = string.gsub(s, "%%(%x%x)", function (h)
+          return string.char(tonumber(h, 16))
+         end)
+     return s
+end
+
 
 function setup_server()
 
@@ -82,7 +90,7 @@ end
 -- GPIO0 resets the module
 gpio.mode(3, gpio.INT)
 gpio.trig(3,"both",function()
-           --node.restart()
+           node.restart()
      end)
      
 -- read previous config
@@ -91,13 +99,6 @@ if file.open("config.lc") then
      dofile("config.lc")
 end
 
-local unescape = function (s)
-     s = string.gsub(s, "+", " ")
-     s = string.gsub(s, "%%(%x%x)", function (h)
-          return string.char(tonumber(h, 16))
-         end)
-     return s
-end
 
 
 print("Get available APs")
