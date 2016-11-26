@@ -18,7 +18,7 @@ function setup_server()
 
      print("Setting up Wifi AP")
      local cfg={}
-     cfg.ssid = "ESPconfig"
+     cfg.ssid = "ESP" ..node.chipid()
      cfg.pwd  = "12345678"
 
      wifi.setmode(wifi.SOFTAP)
